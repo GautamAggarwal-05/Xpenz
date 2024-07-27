@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { Radio, Select, Table } from "antd";
+import { Button, Radio, Select, Table } from "antd";
 import searchImg from "../../assets/search.svg";
 import Papa from 'papaparse';
 import { toast } from 'react-toastify';
-function Transactiontable({transactions,addTransaction,fetchTransaction}) {
+function Transactiontable({transactions,addTransaction,fetchTransaction,showUpdateModal}) {
     const {Option} = Select;
     const [search,setSearch] = useState("");
     const [typeFilter, setTypeFilter] = useState("");
@@ -27,12 +27,19 @@ function Transactiontable({transactions,addTransaction,fetchTransaction}) {
         {
             title: 'Type',
             dataIndex: 'type',
-            key: 'type',
+            key: 'type',  
           },
         {
             title: 'Date',
             dataIndex: 'date',
             key: 'date',
+          },
+          {
+            title: 'Action',
+            key: 'action',
+            render: (text, record) => (
+              <Button onClick={() => showUpdateModal(record)}>Update</Button>
+            ),
           },
           
       ];
@@ -168,7 +175,10 @@ function Transactiontable({transactions,addTransaction,fetchTransaction}) {
         </div>
       </div>
 
-      <Table columns={columns} dataSource={sortedTransactions} />
+      <Table columns={columns}
+       dataSource={sortedTransactions}
+       rowKey={(record) => record.id}
+      />
     </div>
   </div>
 )
