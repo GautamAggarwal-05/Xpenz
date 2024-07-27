@@ -47,3 +47,11 @@
     box-shadow: var(--shadow);
     border-radius: 0.5rem;
   }
+
+  .Loader{
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+  }
